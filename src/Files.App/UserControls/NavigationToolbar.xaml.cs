@@ -23,6 +23,8 @@ namespace Files.App.UserControls
 		private readonly ICommandManager Commands = Ioc.Default.GetRequiredService<ICommandManager>();
 		private readonly StatusCenterViewModel OngoingTasksViewModel = Ioc.Default.GetRequiredService<StatusCenterViewModel>();
 		private readonly IContentPageContext ContentPageContext = Ioc.Default.GetRequiredService<IContentPageContext>();
+		private readonly Files.App.Services.Search.EverythingInstallPromptService everythingInstallPromptService = Ioc.Default.GetRequiredService<Files.App.Services.Search.EverythingInstallPromptService>();
+		private NavigationToolbarViewModel? _previousViewModel;
 
 		// Properties
 
@@ -65,6 +67,37 @@ namespace Files.App.UserControls
 				StatusCenterTeachingTip.IsOpen = true;
 				userSettingsService.AppSettingsService.ShowStatusCenterTeachingTip = false;
 			}
+		}
+
+		partial void OnViewModelChanged(NavigationToolbarViewModel? newValue)
+		{
+			if (_previousViewModel is not null)
+				_previousViewModel.PropertyChanged -= OnViewModelPropertyChanged;
+			_previousViewModel = newValue;
+			if (newValue is not null)
+				newValue.PropertyChanged += OnViewModelPropertyChanged;
+		}
+
+		private void OnViewModelPropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+		{
+			if (e.PropertyName is nameof(NavigationToolbarViewModel.OmnibarCurrentSelectedModeName)
+				&& ViewModel?.OmnibarCurrentSelectedModeName == NavigationToolbarViewModel.OmnibarSearchModeName
+				&& everythingInstallPromptService.ShouldShow)
+			{
+				EverythingInstallPromptTeachingTip.IsOpen = true;
+			}
+		}
+
+		private async void EverythingInstallPromptTeachingTip_ActionButtonClick(TeachingTip sender, object args)
+		{
+			everythingInstallPromptService.Dismiss();
+			EverythingInstallPromptTeachingTip.IsOpen = false;
+			await Launcher.LaunchUriAsync(new Uri("https://www.voidtools.com/downloads/"));
+		}
+
+		private void EverythingInstallPromptTeachingTip_CloseButtonClick(TeachingTip sender, object args)
+		{
+			everythingInstallPromptService.Dismiss();
 		}
 
 		private void Button_AccessKeyInvoked(UIElement sender, AccessKeyInvokedEventArgs args)

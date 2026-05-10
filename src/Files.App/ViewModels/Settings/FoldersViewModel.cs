@@ -294,5 +294,19 @@ namespace Files.App.ViewModels.Settings
 				}
 			}
 		}
+
+		public bool UseEverythingSearch
+		{
+			get => UserSettingsService.GeneralSettingsService.PreferredSearchEngine == PreferredSearchEngine.Everything;
+			set
+			{
+				var newEngine = value ? PreferredSearchEngine.Everything : PreferredSearchEngine.Windows;
+				if (newEngine != UserSettingsService.GeneralSettingsService.PreferredSearchEngine)
+				{
+					UserSettingsService.GeneralSettingsService.PreferredSearchEngine = newEngine;
+					OnPropertyChanged();
+				}
+			}
+		}
 	}
 }

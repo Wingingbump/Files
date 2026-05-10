@@ -518,6 +518,18 @@
 			Subtitle="{helpers:ResourceString Name=OngoingTasksTeachingTip/Subtitle}"
 			Target="{x:Bind ShowStatusCenterButton}" />
 
+		<!--  Everything install prompt TeachingTip  -->
+		<TeachingTip
+			x:Name="EverythingInstallPromptTeachingTip"
+			Title="{helpers:ResourceString Name=EverythingInstallPromptTeachingTip/Title}"
+			ActionButtonClick="EverythingInstallPromptTeachingTip_ActionButtonClick"
+			ActionButtonContent="{helpers:ResourceString Name=EverythingGetLink}"
+			CloseButtonClick="EverythingInstallPromptTeachingTip_CloseButtonClick"
+			CloseButtonContent="{helpers:ResourceString Name=Close}"
+			IsOpen="False"
+			Subtitle="{helpers:ResourceString Name=EverythingInstallPromptTeachingTip/Subtitle}"
+			Target="{x:Bind OmnibarSearchMode}" />
+
 		<VisualStateManager.VisualStateGroups>
 			<VisualStateGroup x:Name="NavigationStates">
 				<VisualState x:Name="Narrow">

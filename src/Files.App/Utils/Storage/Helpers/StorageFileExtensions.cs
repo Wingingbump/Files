@@ -208,6 +208,9 @@ namespace Files.App.Utils.Storage
 				: value;
 			var item = await BaseStorageFile.GetFileFromPathAsync(fullPath);
 
+			if (item is null)
+				throw new FileNotFoundException(fullPath);
+
 			if (parentFolder is not null && parentFolder.Item is IPasswordProtectedItem ppis && item is IPasswordProtectedItem ppid)
 				ppid.Credentials = ppis.Credentials;
 

@@ -348,5 +348,15 @@ namespace Files.App.Data.Contracts
 		/// Gets or sets a value indicating whether smooth scrolling is enabled.
 		/// </summary>
 		bool EnableSmoothScrolling { get; set; }
+
+		/// <summary>
+		/// Gets or sets a value indicating which search engine to use.
+		/// </summary>
+		PreferredSearchEngine PreferredSearchEngine { get; set; }
+
+		/// <summary>
+		/// Gets or sets a value indicating whether the user has dismissed the "Everything not installed" prompt.
+		/// </summary>
+		bool EverythingInstallPromptDismissed { get; set; }
 	}
 }

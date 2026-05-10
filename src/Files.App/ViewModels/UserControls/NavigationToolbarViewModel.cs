@@ -29,6 +29,7 @@ namespace Files.App.ViewModels.UserControls
 		// Dependency injections
 
 		private readonly IUserSettingsService UserSettingsService = Ioc.Default.GetRequiredService<IUserSettingsService>();
+		private readonly Files.App.Utils.Storage.Search.ISearchEngineSelector searchEngineSelector = Ioc.Default.GetRequiredService<Files.App.Utils.Storage.Search.ISearchEngineSelector>();
 		private readonly IAppearanceSettingsService AppearanceSettingsService = Ioc.Default.GetRequiredService<IAppearanceSettingsService>();
 		private readonly DrivesViewModel drivesViewModel = Ioc.Default.GetRequiredService<DrivesViewModel>();
 		private readonly IUpdateService UpdateService = Ioc.Default.GetRequiredService<IUpdateService>();
@@ -1165,7 +1166,7 @@ namespace Files.App.ViewModels.UserControls
 					MaxItemCount = 10,
 				};
 
-				var results = await search.SearchAsync();
+				var results = await searchEngineSelector.Current.SuggestAsync(search, CancellationToken.None);
 				newSuggestions.AddRange(results.Select(result => new SuggestionModel(result)));
 			}
 

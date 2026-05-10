@@ -4551,4 +4551,22 @@
   <data name="EditTagsGroupDescription" xml:space="preserve">
     <value>Add or remove file tags</value>
   </data>
+  <data name="SearchEngine" xml:space="preserve">
+    <value>Search engine</value>
+  </data>
+  <data name="UseEverythingSearch" xml:space="preserve">
+    <value>Use Everything (voidtools)</value>
+  </data>
+  <data name="UseEverythingSearchDescription" xml:space="preserve">
+    <value>Uses Everything's index for fast search results. Falls back to Windows Search when Everything is not running.</value>
+  </data>
+  <data name="EverythingInstallPromptTeachingTip.Title" xml:space="preserve">
+    <value>Everything is not running</value>
+  </data>
+  <data name="EverythingInstallPromptTeachingTip.Subtitle" xml:space="preserve">
+    <value>Install and run Everything by voidtools for instant indexed search. Falling back to Windows Search for now.</value>
+  </data>
+  <data name="EverythingGetLink" xml:space="preserve">
+    <value>Get Everything</value>
+  </data>
 </root>

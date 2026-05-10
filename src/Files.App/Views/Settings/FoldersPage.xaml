@@ -210,6 +210,23 @@
 						Severity="Warning" />
 				</wctcontrols:SettingsExpander.ItemsHeader>
 			</wctcontrols:SettingsExpander>
+
+			<!--  Search  -->
+			<TextBlock
+				Padding="0,16,0,4"
+				FontSize="16"
+				FontWeight="Medium"
+				Text="{helpers:ResourceString Name=SearchEngine}" />
+
+			<!--  Everything search engine toggle  -->
+			<wctcontrols:SettingsCard
+				Description="{helpers:ResourceString Name=UseEverythingSearchDescription}"
+				Header="{helpers:ResourceString Name=UseEverythingSearch}">
+				<wctcontrols:SettingsCard.HeaderIcon>
+					<FontIcon Glyph="&#xE721;" />
+				</wctcontrols:SettingsCard.HeaderIcon>
+				<ToggleSwitch AutomationProperties.Name="{helpers:ResourceString Name=UseEverythingSearch}" IsOn="{x:Bind ViewModel.UseEverythingSearch, Mode=TwoWay}" />
+			</wctcontrols:SettingsCard>
 		</StackPanel>
 	</Grid>
 </Page>

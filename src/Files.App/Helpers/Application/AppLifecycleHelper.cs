@@ -265,6 +265,12 @@ namespace Files.App.Helpers
 					.AddSingleton<IStorageArchiveService, StorageArchiveService>()
 					.AddSingleton<IStorageSecurityService, StorageSecurityService>()
 					.AddSingleton<IWindowsCompatibilityService, WindowsCompatibilityService>()
+					// Search engines
+					.AddSingleton<Files.App.Services.Search.IEverythingClient, Files.App.Services.Search.EverythingClient>()
+					.AddSingleton<Files.App.Utils.Storage.Search.WindowsSearchEngineService>()
+					.AddSingleton<Files.App.Utils.Storage.Search.EverythingSearchEngineService>()
+					.AddSingleton<Files.App.Utils.Storage.Search.ISearchEngineSelector, Files.App.Utils.Storage.Search.SearchEngineSelector>()
+					.AddSingleton<Files.App.Services.Search.EverythingInstallPromptService>()
 					// ViewModels
 					.AddSingleton<MainPageViewModel>()
 					.AddSingleton<InfoPaneViewModel>()
@@ -385,7 +391,7 @@ namespace Files.App.Helpers
 				Debug.WriteLine(formattedException.ToString());
 
 				// Please check "Output Window" for exception details (View -> Output Window) (CTRL + ALT + O)
-				Debugger.Break();
+				//Debugger.Break();
 
 				// Save the current tab list in case it was overwriten by another instance
 				SafetyExtensions.IgnoreExceptions(SaveSessionTabs);

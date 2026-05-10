@@ -60,6 +60,7 @@ namespace Files.App.ViewModels
 		private readonly IStorageCacheService fileListCache = Ioc.Default.GetRequiredService<IStorageCacheService>();
 		private readonly IWindowsSecurityService WindowsSecurityService = Ioc.Default.GetRequiredService<IWindowsSecurityService>();
 		private readonly IStorageTrashBinService StorageTrashBinService = Ioc.Default.GetRequiredService<IStorageTrashBinService>();
+		private readonly Files.App.Utils.Storage.Search.ISearchEngineSelector searchEngineSelector = Ioc.Default.GetRequiredService<Files.App.Utils.Storage.Search.ISearchEngineSelector>();
 		private readonly IContentPageContext ContentPageContext = Ioc.Default.GetRequiredService<IContentPageContext>();
 
 		// Only used for Binding and ApplyFilesAndFoldersChangesAsync, don't manipulate on this!
@@ -2815,7 +2816,7 @@ namespace Files.App.ViewModels
 				await ApplyFilesAndFoldersChangesAsync();
 			};
 
-			await search.SearchAsync(results, searchCTS.Token);
+			await searchEngineSelector.Current.SearchAsync(search, results, searchCTS.Token);
 
 			filesAndFolders = new ConcurrentCollection<ListedItem>(results);
 

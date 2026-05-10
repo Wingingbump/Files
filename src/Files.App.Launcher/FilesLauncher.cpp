@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <algorithm>
+#include <cwctype>
 #include <exdisp.h>
 #include <iostream>
 #include <objbase.h>
@@ -270,7 +271,7 @@ size_t strifind(const std::wstring& strHaystack, const std::wstring& strNeedle)
 	auto it = std::search(
 		strHaystack.begin(), strHaystack.end(),
 		strNeedle.begin(), strNeedle.end(),
-		[](wchar_t ch1, wchar_t ch2) { return std::toupper(ch1) == std::toupper(ch2); }
+		[](wchar_t ch1, wchar_t ch2) { return std::towupper(ch1) == std::towupper(ch2); }
 	);
 
 	return it != strHaystack.end() ? it - strHaystack.begin() : std::wstring::npos;
@@ -278,8 +279,8 @@ size_t strifind(const std::wstring& strHaystack, const std::wstring& strNeedle)
 
 bool comparei(std::wstring stringA, std::wstring stringB)
 {
-	transform(stringA.begin(), stringA.end(), stringA.begin(), std::toupper);
-	transform(stringB.begin(), stringB.end(), stringB.begin(), std::toupper);
+	transform(stringA.begin(), stringA.end(), stringA.begin(), [](wchar_t c) { return (wchar_t)std::towupper(c); });
+	transform(stringB.begin(), stringB.end(), stringB.begin(), [](wchar_t c) { return (wchar_t)std::towupper(c); });
 
 	return (stringA == stringB);
 }

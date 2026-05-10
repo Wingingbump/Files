@@ -429,6 +429,18 @@ namespace Files.App.Services.Settings
 			set => Set(value);
 		}
 
+		public PreferredSearchEngine PreferredSearchEngine
+		{
+			get => (PreferredSearchEngine)Get((long)PreferredSearchEngine.Windows);
+			set => Set((long)value);
+		}
+
+		public bool EverythingInstallPromptDismissed
+		{
+			get => Get(false);
+			set => Set(value);
+		}
+
 		protected override void RaiseOnSettingChangedEvent(object sender, SettingChangedEventArgs e)
 		{
 			base.RaiseOnSettingChangedEvent(sender, e);
